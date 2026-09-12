@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path="notes.md" />
+  </Folder>
+  <Project Path="../PensionCalculator.Core/PensionCalculator.Core.csproj" Id="8d3b54f3-3b96-4cbc-b0f2-e5c52daeac7a" />
+  <Project Path="PensionCalculator.Wpf.csproj" />
+</Solution>

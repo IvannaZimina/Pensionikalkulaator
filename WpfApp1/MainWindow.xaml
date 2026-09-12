@@ -1,0 +1,181 @@
+﻿<Window x:Class="PensionCalculator.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pensionikalkulaator" Height="480" Width="480"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="#F5F7FA">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="LabelText">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#2D3748"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#1A202C"/>
+            <Setter Property="BorderBrush" Value="#CBD5E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#A0AEC0"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#3182CE"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="PrimaryButton">
+            <Setter Property="Background" Value="#3182CE"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2B6CB0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Pensionikogumise kalkulaator" FontSize="20" FontWeight="Bold" 
+                   Foreground="#1A202C" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,20"/>
+
+        <TextBlock Text="Praegune vanus (aastates):" Style="{StaticResource LabelText}" Grid.Row="1" Grid.Column="0"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBox x:Name="TxtCurrentAge"/>
+            <TextBlock Text="nt 30" Foreground="#A0AEC0" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=TxtCurrentAge}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <TextBlock Text="Sihtvanus (aastates):" Style="{StaticResource LabelText}" Grid.Row="2" Grid.Column="0"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <TextBox x:Name="TxtTargetAge"/>
+            <TextBlock Text="nt 65" Foreground="#A0AEC0" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=TxtTargetAge}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <TextBlock Text="Praegused säästud (€):" Style="{StaticResource LabelText}" Grid.Row="3" Grid.Column="0"/>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <TextBox x:Name="TxtCurrentSavings"/>
+            <TextBlock Text="nt 1000" Foreground="#A0AEC0" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=TxtCurrentSavings}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <TextBlock Text="Iga-kuune makse (€):" Style="{StaticResource LabelText}" Grid.Row="4" Grid.Column="0"/>
+        <Grid Grid.Row="4" Grid.Column="1">
+            <TextBox x:Name="TxtMonthlyContribution"/>
+            <TextBlock Text="nt 150" Foreground="#A0AEC0" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=TxtMonthlyContribution}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <TextBlock Text="Oodatud aastane tootlus (%):" Style="{StaticResource LabelText}" Grid.Row="5" Grid.Column="0"/>
+        <Grid Grid.Row="5" Grid.Column="1">
+            <TextBox x:Name="TxtAnnualRate"/>
+            <TextBlock Text="nt 7" Foreground="#A0AEC0" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=TxtAnnualRate}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0">
+            <Button Content="Arvuta kapital" Click="BtnCalculate_Click" Style="{StaticResource PrimaryButton}"/>
+
+            <TextBlock x:Name="TxtError" Foreground="#E53E3E" FontWeight="Bold" Margin="0,10,0,0" TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                <TextBlock Text="Kogutud kapital: " FontWeight="Bold" FontSize="15" Foreground="#2D3748"/>
+                <TextBlock x:Name="TxtResult" Text="—" FontSize="15" FontWeight="Bold" Foreground="#3182CE"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
